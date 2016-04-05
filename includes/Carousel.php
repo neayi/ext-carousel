@@ -10,7 +10,6 @@
 
 class Carousel {
 
-
 	private static $carouselCounter = 0;
 
 	private static function removeNoImages(&$imgs) {
@@ -23,6 +22,10 @@ class Carousel {
 		foreach ($imgs as $key => $value) {
 			if(in_array($value, $imgsToRemove) && ! $first) {
 				unset($imgs[$key]);
+				continue;
+			}
+			if (preg_match('/[[File:{{{(.*)}}}]]/', $imgs[$key])){
+				unset($imgs[$key]);
 			}
 			$first=false;
 		}
@@ -30,7 +33,7 @@ class Carousel {
 
 
 	public static function addParser( $input, $img1='') {
-		
+
 		self::$carouselCounter++;
 		$carouselId = self::$carouselCounter;
 
@@ -39,7 +42,7 @@ class Carousel {
 		self::removeNoImages($imgs);
 
 		$out = '<div data-interval="false" data-ride="carousel" class="carousel" id="myCarousel'.$carouselId.'">';
-		
+
 		$out .= '<div class="carousel-inner">';
 		$active = 'active';
 		foreach ($imgs as $img) {
