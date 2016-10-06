@@ -24,7 +24,7 @@ class Carousel {
 				unset($imgs[$key]);
 				continue;
 			}
-			if (preg_match('/[[File:{{{(.*)}}}[\|a-z]*]]/', $imgs[$key])){
+			if (preg_match('/\[\[File:\{\{\{(.*)\}\}\}[\|a-z]*\]\]/', $imgs[$key])){
 				unset($imgs[$key]);
 			}
 			$first=false;
