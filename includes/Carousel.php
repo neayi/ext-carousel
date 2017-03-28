@@ -19,6 +19,7 @@ class Carousel {
 			"[[File:No-image-yet.jpg]]"
 		);
 
+		$keysToRemove = [];
 		foreach ($imgs as $key => $value) {
 			if(in_array($value, $imgsToRemove) && ! $first) {
 				unset($imgs[$key]);
@@ -26,9 +27,11 @@ class Carousel {
 			}
 			if (preg_match('/\[\[File:\{\{\{(.*)\}\}\}[\|a-zA-Z]*\]\]/', $imgs[$key])){
 				unset($imgs[$key]);
+				continue;
 			}
 
 			if (preg_match('/\[\[([a-zA-Z]+):\{\{\{(.*)\}\}\}[\|a-zA-Z]*\]\]/', $imgs[$key])){
+				continue;
 				unset($imgs[$key]);
 			}
 			$first=false;
