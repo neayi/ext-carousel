@@ -43,7 +43,12 @@ class Carousel {
 	}
 
 
-	public static function addParser( $input, $img1='') {
+	public static function addParser( $parser, $img1='') {
+		global $wgCarouselDisableMouseOver;
+
+		if( ! $wgCarouselDisableMouseOver) {
+			$parser->getOutput()->addModules('ext.carousel.js');
+		}
 
 		self::$carouselCounter++;
 		$carouselId = self::$carouselCounter;
@@ -66,12 +71,12 @@ class Carousel {
 			// carousel indicator :
 			$out .= '<ol class="carousel-indicators">';
 			$count = 0;
-			$active = 'class="active"';
+			$class = 'carousel-thumb active';
 			foreach ($imgs as $img) {
 				// for video, remove controls in indicators :
 				$img = preg_replace('/\[\[(.*)\]\]/i', '[[$1|no-controls]]', $img);
-				$out .= '<li '.$active.' data-slide-to="'.$count.'" data-target="#myCarousel'.$carouselId.'">'.$img.'</li>';
-				$active = '';
+				$out .= '<li class="'.$class.'" data-slide-to="'.$count.'" data-target="#myCarousel'.$carouselId.'">'.$img.'</li>';
+				$class = 'carousel-thumb';
 				$count++;
 			}
 			$out .= '</ol>';

@@ -5,7 +5,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 }
 
 $dir = dirname( __FILE__ );
- 
+
 $wgExtensionCredits['parserhook'][] = array(
 	'path' => __FILE__,
 	'name' => 'Carousel',
@@ -13,6 +13,20 @@ $wgExtensionCredits['parserhook'][] = array(
 	'version' => '1.0',
 	'author' => array( 'Pierre Boutet' ),
 	'url' => 'https://www.wikifab.org'
+);
+
+
+$wgResourceModules['ext.carousel.js'] = array(
+		'scripts' => 'carousel.js',
+		'styles' => array(),
+		'messages' => array(
+		),
+		'dependencies' => array(
+				'jquery.ui.core'
+		),
+		'position' => 'bottom',
+		'localBasePath' => __DIR__ . '/resources',
+		'remoteExtPath' => 'Carousel/resources',
 );
 
 
@@ -28,7 +42,7 @@ function wfCarouselFunctions( $parser ) {
 require_once(__DIR__ . "/includes/Carousel.php");
 
 $wgAutoloadClasses['Carousel'] = __DIR__ . "/includes/Carousel.php";
-//$wgMessagesDirs['Carousel'][] = __DIR__ . "/i18n"; 
+//$wgMessagesDirs['Carousel'][] = __DIR__ . "/i18n";
 
 // Allow translation of the parser function name
 $wgExtensionMessagesFiles['Carousel'] = __DIR__ . '/Carousel.i18n.php';
