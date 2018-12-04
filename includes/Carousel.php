@@ -74,7 +74,7 @@ class Carousel {
 			$class = 'carousel-thumb active';
 			foreach ($imgs as $img) {
 				// for video, remove controls in indicators :
-				$img = preg_replace('/\[\[(.*)\]\]/i', '[[$1|no-controls]]', $img);
+				$img = preg_replace('/\[\[(.*)\]\]/i', '[[$1|no-controls|]]', $img);
 				$out .= '<li class="'.$class.'" data-slide-to="'.$count.'" data-target="#myCarousel'.$carouselId.'">'.$img.'</li>';
 				$class = 'carousel-thumb';
 				$count++;
