@@ -62,7 +62,7 @@ class Carousel {
 		$out .= '<div class="carousel-inner">';
 		$active = 'active';
 		foreach ($imgs as $img) {
-			$out .= '<div class="item '.$active.'">'.$img.'</div>';
+			$out .= '<div class="carousel-item item '.$active.'">'.$img.'</div>';
 			$active = '';
 		}
 		$out .= '</div>';
