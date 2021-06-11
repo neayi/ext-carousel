@@ -69,7 +69,7 @@ class Carousel
 		// Allow images to be entered in the format image1.jpg, image2.jpg (not full wikified)
 		foreach ($imgs as $k => $anImage) {
 			if (!preg_match("@\[\[@", $anImage))
-				$imgs[$k] = '[[File:' . trim($anImage) . ' | frameless]]';
+				$imgs[$k] = '[[File:' . trim($anImage) . ' | frameless | link=]]';
 		}
 
 		$out = '<div data-interval="5000" data-ride="carousel" class="carousel" id="myCarousel' . $carouselId . '">';
@@ -87,12 +87,11 @@ class Carousel
 			// carousel indicator :
 			$out .= '<ol class="carousel-indicators">';
 			$count = 0;
-			$class = 'carousel-thumb active';
+			$class = 'active';
 			foreach ($imgs as $img) {
 				// for video, remove controls in indicators :
-				$img = preg_replace('/\[\[(.*)\]\]/i', '[[$1|no-controls|]]', $img);
-				$out .= '<li class="' . $class . '" data-slide-to="' . $count . '" data-target="#myCarousel' . $carouselId . '">' . $img . '</li>';
-				$class = 'carousel-thumb';
+				$out .= '<li class="' . $class . '" data-slide-to="' . $count . '" data-target="#myCarousel' . $carouselId . '"></li>';
+				$class = '';
 				$count++;
 			}
 			$out .= '</ol>';
