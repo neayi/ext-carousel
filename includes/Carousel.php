@@ -87,11 +87,12 @@ class Carousel
 			// carousel indicator :
 			$out .= '<ol class="carousel-indicators">';
 			$count = 0;
-			$class = 'active';
+			$class = 'carousel-thumb active';
 			foreach ($imgs as $img) {
 				// for video, remove controls in indicators :
-				$out .= '<li class="' . $class . '" data-slide-to="' . $count . '" data-target="#myCarousel' . $carouselId . '"></li>';
-				$class = '';
+				$img = preg_replace('/\[\[(.*)\]\]/i', '[[$1|no-controls|]]', $img);
+				$out .= '<li class="' . $class . '" data-slide-to="' . $count . '" data-target="#myCarousel' . $carouselId . '">' . $img . '</li>';
+				$class = 'carousel-thumb';
 				$count++;
 			}
 			$out .= '</ol>';
